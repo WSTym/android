@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1048651313851",
+    "firebase_url": "https://sagaz-tym.firebaseio.com",
+    "project_id": "sagaz-tym",
+    "storage_bucket": "sagaz-tym.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048651313851:android:7f777de4244ac6fe23af9e",
+        "android_client_info": {
+          "package_name": "com.pdm.sagaz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048651313851-66qev2ani9ioij3d875v17gn35245kfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB93C0BIVIoUplcybxLh8QyzpWPdgx4o1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048651313851-66qev2ani9ioij3d875v17gn35245kfc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
