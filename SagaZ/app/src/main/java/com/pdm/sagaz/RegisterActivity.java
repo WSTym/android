@@ -1,27 +1,41 @@
 package com.pdm.sagaz;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+import java.util.UUID;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText mEditName;
-    private EditText mEditEmail;
-    private EditText mEditPassword;
-    private Button mBtnSignUp;
+    private EditText mEditName, mEditEmail, mEditPassword;
+    private Button mBtnSignUp, mBntPhoto;
+    private Uri mSelectedUri;
+    private ImageView mImgPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +46,55 @@ public class RegisterActivity extends AppCompatActivity {
         mEditEmail = findViewById(R.id.edTxt_Email);
         mEditPassword = findViewById(R.id.edTxt_Password);
         mBtnSignUp = findViewById(R.id.btn_SignUp);
+        mBntPhoto = findViewById(R.id.btn_Photo);
+        mImgPhoto = findViewById(R.id.img_Photo);
 
         mBtnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Teste", "Funciona!");
+                createUser();
+            }
+        });
+
+        mBntPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectPhoto();
             }
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0) {
+            mSelectedUri = data.getData();
+
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedUri);
+                mImgPhoto.setImageDrawable(new BitmapDrawable(bitmap));
+                mBntPhoto.setAlpha(0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void selectPhoto() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, 0);
+    }
+
     private void createUser() {
+        String name = mEditName.getText().toString();
         String email = mEditEmail.getText().toString();
         String password = mEditPassword.getText().toString();
 
-        if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
-            Toast.makeText(this, "O Email e a Senha devem ser preencindos", Toast.LENGTH_SHORT).show();
+        if (name == null || name.isEmpty() || email == null || email.isEmpty() || password == null || password.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Os campos Nome, Email e Senha devem ser preencindos", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -54,13 +102,38 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.i("Teste", task.getResult().getUser().getUid());
+                        if (task.isSuccessful()) {
+                            Toast.makeText(RegisterActivity.this, "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                            
+                            saveUserInFirebase();
+                            
+                            finish();
+                        }else
+                            Toast.makeText(RegisterActivity.this, "Falha ao cadastrar usuário", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.i("Teste", e.getMessage());
+                    }
+                });
+    }
+
+    private void saveUserInFirebase() {
+        String filename = UUID.randomUUID().toString();
+        final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
+        ref.putFile(mSelectedUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
                     }
                 });
     }

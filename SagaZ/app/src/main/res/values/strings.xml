@@ -3,4 +3,9 @@
     <string name="enter">Entrar</string>
     <string name="newAccount">Não tem uma conta? Clique aqui!</string>
     <string name="signup">cadastrar</string>
+    <string name="photo">Foto</string>
+    <string name="app_logo">app logo</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="name">Nome</string>
 </resources>

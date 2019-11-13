@@ -15,13 +15,13 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg_edittext_rounded"
-        android:hint="Nome"
-        android:padding="8dp"
         android:ems="10"
+        android:hint="@string/name"
         android:inputType="text"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_Photo" />
 
     <EditText
         android:id="@+id/edTxt_Email"
@@ -29,7 +29,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_edittext_rounded"
-        android:hint="E-mail"
+        android:hint="@string/email"
         android:padding="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -43,7 +43,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_edittext_rounded"
-        android:hint="Senha"
+        android:hint="@string/password"
         android:padding="8dp"
         android:ems="10"
         android:inputType="textPassword"
@@ -57,11 +57,36 @@
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/bg_button_rounded"
-        android:textColor="@android:color/white"
         android:text="@string/signup"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/edTxt_Password"
         app:layout_constraintStart_toStartOf="@+id/edTxt_Password"
         app:layout_constraintTop_toBottomOf="@+id/edTxt_Password" />
+
+    <Button
+        android:id="@+id/btn_Photo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/photo"
+        android:background="@drawable/bg_btn_photo_rounded"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_Photo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_Photo"
+        app:layout_constraintEnd_toEndOf="@+id/btn_Photo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_Photo"
+        app:layout_constraintTop_toTopOf="@+id/btn_Photo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
