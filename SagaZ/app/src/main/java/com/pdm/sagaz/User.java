@@ -1,7 +1,10 @@
 package com.pdm.sagaz;
 
 public class User {
-    private final String uuid, username, profileUri;
+    private String uuid, username, profileUri;
+
+    public User() {
+    }
 
     public User(String uuid, String username, String profileUri) {
         this.uuid = uuid;
