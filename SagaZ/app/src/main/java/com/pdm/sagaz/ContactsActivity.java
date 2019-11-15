@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
+import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.util.List;
@@ -38,6 +42,18 @@ public class ContactsActivity extends AppCompatActivity {
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull Item item, @NonNull View view) {
+                Intent intent = new Intent(ContactsActivity.this, ChatActivity.class);
+
+                UserItem userItem = (UserItem) item;
+                intent.putExtra("user", userItem.user);
+
+                startActivity(intent);
+            }
+        });
+
         fetchUsers();
     }
 
@@ -47,6 +63,7 @@ public class ContactsActivity extends AppCompatActivity {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                         if (e != null) {
+                            Log.e("teste", e.getMessage(), e);
                             return;
                         }
 
@@ -55,6 +72,7 @@ public class ContactsActivity extends AppCompatActivity {
                             User user = doc.toObject(User.class);
 
                             adapter.add(new UserItem(user));
+                            adapter.notifyDataSetChanged();
                         }
                     }
                 });
