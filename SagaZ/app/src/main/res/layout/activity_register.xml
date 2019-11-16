@@ -8,7 +8,7 @@
     tools:context=".RegisterActivity">
 
     <EditText
-        android:id="@+id/edTxt_Name"
+        android:id="@+id/edit_Name"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_Photo" />
 
     <EditText
-        android:id="@+id/edTxt_Email"
+        android:id="@+id/edit_Email"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -33,12 +33,12 @@
         android:padding="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/edTxt_Name"
-        app:layout_constraintStart_toStartOf="@+id/edTxt_Name"
-        app:layout_constraintTop_toBottomOf="@+id/edTxt_Name" />
+        app:layout_constraintEnd_toEndOf="@+id/edit_Name"
+        app:layout_constraintStart_toStartOf="@+id/edit_Name"
+        app:layout_constraintTop_toBottomOf="@+id/edit_Name" />
 
     <EditText
-        android:id="@+id/edTxt_Password"
+        android:id="@+id/edit_Password"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -47,9 +47,9 @@
         android:padding="8dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/edTxt_Email"
-        app:layout_constraintStart_toStartOf="@+id/edTxt_Email"
-        app:layout_constraintTop_toBottomOf="@+id/edTxt_Email" />
+        app:layout_constraintEnd_toEndOf="@+id/edit_Email"
+        app:layout_constraintStart_toStartOf="@+id/edit_Email"
+        app:layout_constraintTop_toBottomOf="@+id/edit_Email" />
 
     <Button
         android:id="@+id/btn_SignUp"
@@ -59,9 +59,9 @@
         android:background="@drawable/bg_button_rounded"
         android:text="@string/signup"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/edTxt_Password"
-        app:layout_constraintStart_toStartOf="@+id/edTxt_Password"
-        app:layout_constraintTop_toBottomOf="@+id/edTxt_Password" />
+        app:layout_constraintEnd_toEndOf="@+id/edit_Password"
+        app:layout_constraintStart_toStartOf="@+id/edit_Password"
+        app:layout_constraintTop_toBottomOf="@+id/edit_Password" />
 
     <Button
         android:id="@+id/btn_Photo"

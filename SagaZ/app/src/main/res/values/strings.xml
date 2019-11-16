@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SagaZ</string>
     <string name="enter">Entrar</string>
-    <string name="newAccount">Não tem uma conta? Clique aqui!</string>
+    <string name="new_account">Não tem uma conta? Clique aqui!</string>
     <string name="signup">cadastrar</string>
     <string name="photo">Foto</string>
     <string name="app_logo">app logo</string>
@@ -10,7 +10,7 @@
     <string name="name">Nome</string>
     <string name="contacts">Contatos</string>
     <string name="logout">Logout</string>
-    <string name="contactName">Nome Contato</string>
+    <string name="contact_name">Nome Contato</string>
     <string name="btnChat">Enviar</string>
     <string name="message">Digite a mensagem</string>
 </resources>

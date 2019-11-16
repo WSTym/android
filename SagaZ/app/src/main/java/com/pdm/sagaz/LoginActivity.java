@@ -30,8 +30,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEditEmail = findViewById(R.id.edTxt_Email);
-        mEditPassword = findViewById(R.id.edTxt_Password);
+        mEditEmail = findViewById(R.id.edit_Email);
+        mEditPassword = findViewById(R.id.edit_Password);
         mBtnEnter = findViewById(R.id.btn_Enter);
         mTxtNewAccount = findViewById(R.id.txt_NewAccount);
 
@@ -51,10 +51,10 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(LoginActivity.this, "Usuário logaado com sucesso!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Bem vindo!", Toast.LENGTH_SHORT).show();
 
                                 }else
-                                    Toast.makeText(LoginActivity.this, "Falha ao logar usuário", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Falha no Login", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(LoginActivity.this, MessagesActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

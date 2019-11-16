@@ -23,7 +23,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -44,9 +43,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mEditName = findViewById(R.id.edTxt_Name);
-        mEditEmail = findViewById(R.id.edTxt_Email);
-        mEditPassword = findViewById(R.id.edTxt_Password);
+        mEditName = findViewById(R.id.edit_Name);
+        mEditEmail = findViewById(R.id.edit_Email);
+        mEditPassword = findViewById(R.id.edit_Password);
         mBtnSignUp = findViewById(R.id.btn_SignUp);
         mBntPhoto = findViewById(R.id.btn_Photo);
         mImgPhoto = findViewById(R.id.img_Photo);
@@ -140,10 +139,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 User user = new User(uid, username, profileUrl);
 
                                 FirebaseFirestore.getInstance().collection("users")
-                                        .add(user)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        .document(uid)
+                                        .set(user)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
-                                            public void onSuccess(DocumentReference documentReference) {
+                                            public void onSuccess(Void avoid) {
 
                                                 Intent intent = new Intent(RegisterActivity.this, MessagesActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
