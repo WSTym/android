@@ -112,11 +112,11 @@ public class ChatActivity extends AppCompatActivity {
 
         editChat.setText(null);
 
-        String fromId = FirebaseAuth.getInstance().getUid();
-        String toId = user.getUuid();
+        final String fromId = FirebaseAuth.getInstance().getUid();
+        final String toId = user.getUuid();
         long timestamp = System.currentTimeMillis();
 
-        Message message = new Message();
+        final Message message = new Message();
         message.setFromId(fromId);
         message.setToId(toId);
         message.setTimestamp(timestamp);
@@ -131,6 +131,18 @@ public class ChatActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
 
+                            Contact contact = new Contact();
+                            contact.setUuid(toId);
+                            contact.setUsername(user.getUsername());
+                            contact.setPhotoUrl(user.getProfileUri());
+                            contact.setTimestamp(message.getTimestamp());
+                            contact.setLastMessage(message.getText());
+
+                            FirebaseFirestore.getInstance().collection("/last-messages")
+                                    .document(fromId)
+                                    .collection("contacts")
+                                    .document(toId)
+                                    .set(contact);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -148,6 +160,18 @@ public class ChatActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
 
+                            Contact contact = new Contact();
+                            contact.setUuid(toId);
+                            contact.setUsername(user.getUsername());
+                            contact.setPhotoUrl(user.getProfileUri());
+                            contact.setTimestamp(message.getTimestamp());
+                            contact.setLastMessage(message.getText());
+
+                            FirebaseFirestore.getInstance().collection("/last-messages")
+                                    .document(toId)
+                                    .collection("contacts")
+                                    .document(fromId)
+                                    .set(contact);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

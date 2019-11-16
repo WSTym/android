@@ -13,4 +13,5 @@
     <string name="contact_name">Nome Contato</string>
     <string name="btnChat">Enviar</string>
     <string name="message">Digite a mensagem</string>
+    <string name="msg">Mensagem</string>
 </resources>
