@@ -89,7 +89,7 @@ public class ContactsActivity extends AppCompatActivity {
         @Override
         public void bind(@NonNull ViewHolder viewHolder, int position) {
             TextView txtNameContact = viewHolder.itemView.findViewById(R.id.txt_Contact);
-            ImageView imgPhotoContact = viewHolder.itemView.findViewById(R.id.img_Photo);
+            ImageView imgPhotoContact = viewHolder.itemView.findViewById(R.id.img_Contact);
 
             txtNameContact.setText(user.getUsername());
 
