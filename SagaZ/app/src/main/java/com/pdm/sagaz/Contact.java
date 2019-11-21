@@ -3,6 +3,7 @@ package com.pdm.sagaz;
 public class Contact {
 
     private String uuid, username, lastMessage, photoUrl;
+    private long timestamp;
 
     public String getUuid() {
         return uuid;
@@ -43,6 +44,4 @@ public class Contact {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
-
-    private long timestamp;
 }
