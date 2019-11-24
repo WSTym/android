@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -31,13 +33,14 @@ import javax.annotation.Nullable;
 public class MessagesActivity extends AppCompatActivity {
 
     private GroupAdapter adapter;
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
-        RecyclerView rv = findViewById(R.id.rv_Contact);
+        rv = findViewById(R.id.rv_Contact);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new GroupAdapter();
@@ -46,6 +49,29 @@ public class MessagesActivity extends AppCompatActivity {
         verifyAuthentication();
 
         fetchLastMessage();
+        rv.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getApplicationContext(),
+                        rv,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Toast.makeText(getApplicationContext(), "Item do Recycler View foi tocado", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Toast.makeText(getApplicationContext(), "Item do Recycler View foi tocado com adapter", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                )
+        );
+
     }
 
     private void fetchLastMessage() {
