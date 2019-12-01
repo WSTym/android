@@ -1,6 +1,5 @@
 package com.pdm.sagaz.fragment;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,7 +27,6 @@ import com.pdm.sagaz.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -109,16 +107,6 @@ public class ContatosFragment extends Fragment {
                 )
         );
 
-        /*Define usuário com e-mail vazio
-        * em caso de e-mail vazio o usuário será utilizado como
-        * cabecalho, exibindo novo grupo */
-        Usuario itemGrupo = new Usuario();
-        itemGrupo.setNome("Novo grupo");
-        itemGrupo.setEmail("");
-
-        listaContatos.add( itemGrupo );
-
-
         return view;
     }
 
@@ -135,6 +123,18 @@ public class ContatosFragment extends Fragment {
     }
 
     public void recuperarContatos(){
+
+        // limpa a listagem de contatos
+        listaContatos.clear();
+
+        /*Define usuário com e-mail vazio
+         * em caso de e-mail vazio o usuário será utilizado como
+         * cabecalho, exibindo novo grupo */
+        Usuario itemGrupo = new Usuario();
+        itemGrupo.setNome("Novo grupo");
+        itemGrupo.setEmail("");
+
+        listaContatos.add( itemGrupo );
 
         valueEventListenerContatos = usuariosRef.addValueEventListener(new ValueEventListener() {
             @Override

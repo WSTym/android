@@ -1,6 +1,5 @@
 package com.pdm.sagaz.fragment;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -97,13 +96,6 @@ public class ConversasFragment extends Fragment {
                 )
         );
 
-
-        //Configura conversas ref
-        String identificadorUsuario = UsuarioFirebase.getIdentificadorUsuario();
-        database = ConfiguracaoFirebase.getFirebaseDatabase();
-        conversasRef = database.child("conversas")
-                .child( identificadorUsuario );
-
         return view;
     }
 
@@ -159,6 +151,14 @@ public class ConversasFragment extends Fragment {
     }
 
     public void recuperarConversas(){
+
+        listaConversas.clear();
+
+        //Configura conversas ref
+        String identificadorUsuario = UsuarioFirebase.getIdentificadorUsuario();
+        database = ConfiguracaoFirebase.getFirebaseDatabase();
+        conversasRef = database.child("conversas")
+                .child( identificadorUsuario );
 
         childEventListenerConversas = conversasRef.addChildEventListener(new ChildEventListener() {
             @Override
