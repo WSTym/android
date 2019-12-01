@@ -18,7 +18,7 @@
             android:id="@+id/textNomeExibicao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Jamilton Damasceno"
+            android:text="SagaZ"
             android:textSize="16sp"
             android:textStyle="bold" />
 

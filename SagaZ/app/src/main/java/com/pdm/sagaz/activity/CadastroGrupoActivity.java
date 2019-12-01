@@ -16,8 +16,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -150,6 +153,7 @@ public class CadastroGrupoActivity extends AppCompatActivity {
                             .child( grupo.getId() + ".jpeg");
 
                     UploadTask uploadTask = imagemRef.putBytes( dadosImagem );
+
                     uploadTask.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -164,7 +168,7 @@ public class CadastroGrupoActivity extends AppCompatActivity {
                                     "Sucesso ao fazer upload da imagem",
                                     Toast.LENGTH_SHORT).show();
 
-                            String url = taskSnapshot.getDownloadUrl().toString();
+                            String url = taskSnapshot.getStorage().getDownloadUrl().toString();
                             grupo.setFoto( url );
 
 

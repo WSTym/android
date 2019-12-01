@@ -1,9 +1,9 @@
 package com.pdm.sagaz.helper;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Permissao {
 
-    public static boolean validarPermissoes(String[] permissoes, Activity activity, int requestCode){
+    public static boolean validarPermissoes(String[] permissoes, AppCompatActivity activity, int requestCode){
 
         if (Build.VERSION.SDK_INT >= 23 ){
 

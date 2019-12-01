@@ -212,7 +212,7 @@ public class ChatActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            String dowloadUrl = taskSnapshot.getDownloadUrl().toString();
+                            String dowloadUrl = taskSnapshot.getStorage().getDownloadUrl().toString();
 
                             Mensagem mensagem = new Mensagem();
                             mensagem.setIdUsuario( idUsuarioRemetente );

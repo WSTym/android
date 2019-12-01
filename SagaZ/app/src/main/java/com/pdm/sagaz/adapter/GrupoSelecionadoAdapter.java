@@ -32,13 +32,13 @@ public class GrupoSelecionadoAdapter  extends RecyclerView.Adapter<GrupoSelecion
     }
 
     @Override
-    public GrupoSelecionadoAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLista = LayoutInflater.from( parent.getContext() ).inflate(R.layout.adapter_grupo_selecionado, parent, false);
-        return new GrupoSelecionadoAdapter.MyViewHolder(itemLista);
+        return new MyViewHolder(itemLista);
     }
 
     @Override
-    public void onBindViewHolder(GrupoSelecionadoAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
 
         Usuario usuario = contatosSelecionados.get( position );
 

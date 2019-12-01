@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         Toolbar toolbar = findViewById(R.id.toolbarPrincipal);
-        toolbar.setTitle("WhatsApp");
+        toolbar.setTitle("SagaZ");
         setSupportActionBar( toolbar );
 
         //Configurar abas

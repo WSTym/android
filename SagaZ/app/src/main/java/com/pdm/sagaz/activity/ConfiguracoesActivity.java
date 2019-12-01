@@ -186,7 +186,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                                     "Sucesso ao fazer upload da imagem",
                                     Toast.LENGTH_SHORT).show();
 
-                            Uri url = taskSnapshot.getDownloadUrl();
+                            Uri url = taskSnapshot.getStorage().getDownloadUrl().getResult();
                             atualizaFotoUsuario( url );
 
                         }

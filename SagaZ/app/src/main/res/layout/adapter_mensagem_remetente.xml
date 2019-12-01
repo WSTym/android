@@ -18,7 +18,6 @@
             android:id="@+id/textNomeExibicao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Jamilton Damasceno"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -32,7 +31,6 @@
             android:id="@+id/textMensagemTexto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Olá tudo bem?"
             android:textSize="18sp" />
     </LinearLayout>
 
