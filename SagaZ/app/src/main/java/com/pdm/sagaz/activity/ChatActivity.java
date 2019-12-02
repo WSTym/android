@@ -133,7 +133,6 @@ public class ChatActivity extends AppCompatActivity {
                 /**********/
             }
 
-
         }
 
         //Configuração adapter
@@ -288,8 +287,6 @@ public class ChatActivity extends AppCompatActivity {
                 }
 
             }
-
-
 
         }else {
             Toast.makeText(ChatActivity.this,

@@ -134,8 +134,6 @@ public class ConversasFragment extends Fragment {
                 }
             }
 
-
-
         }
 
         adapter = new ConversasAdapter(listaConversasBusca, getActivity());

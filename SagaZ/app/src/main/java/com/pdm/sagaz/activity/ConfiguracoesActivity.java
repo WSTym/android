@@ -99,7 +99,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                     startActivityForResult(i, SELECAO_CAMERA );
                 }
 
-
             }
         });
 
@@ -132,7 +131,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 

@@ -17,10 +17,6 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by jamiltondamasceno
- */
-
 public class GrupoSelecionadoAdapter  extends RecyclerView.Adapter<GrupoSelecionadoAdapter.MyViewHolder> {
 
     private List<Usuario> contatosSelecionados;

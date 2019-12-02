@@ -149,7 +149,6 @@ public class ContatosFragment extends Fragment {
                         listaContatos.add( usuario );
                     }
 
-
                 }
 
                 adapter.notifyDataSetChanged();

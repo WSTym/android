@@ -17,10 +17,6 @@ import com.pdm.sagaz.model.Mensagem;
 
 import java.util.List;
 
-/**
- * Created by jamiltondamasceno
- */
-
 public class MensagensAdapter extends RecyclerView.Adapter<MensagensAdapter.MyViewHolder> {
 
     private List<Mensagem> mensagens;
@@ -81,7 +77,6 @@ public class MensagensAdapter extends RecyclerView.Adapter<MensagensAdapter.MyVi
             //Esconder a imagem
             holder.imagem.setVisibility(View.GONE);
         }
-
 
     }
 

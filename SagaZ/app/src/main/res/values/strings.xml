@@ -12,4 +12,12 @@
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_activity_grupo">GrupoActivity</string>
     <string name="title_activity_cadastro_grupo">CadastroGrupoActivity</string>
+    <string name="saudacao">Olá tudo bem?</string>
+    <string name="info">Defina um nome e uma imagem opcional</string>
+    <string name="nome_grupo">Nome do grupo</string>
+    <string name="participantes">Participantes: 0</string>
+    <string name="nome">Nome</string>
+    <string name="email">email</string>
+    <string name="nome_usuario">Nome do usuário</string>
+    <string name="info_usuario">Esse não é o seu nome de usuário nem sua senha. Esse nome ficará visível para seus contatos do SagaZ</string>
 </resources>

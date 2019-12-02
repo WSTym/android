@@ -19,10 +19,6 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by jamiltondamasceno
- */
-
 public class ConversasAdapter extends RecyclerView.Adapter<ConversasAdapter.MyViewHolder> {
 
     private List<Conversa> conversas;
@@ -74,9 +70,6 @@ public class ConversasAdapter extends RecyclerView.Adapter<ConversasAdapter.MyVi
                 }
             }
         }
-
-
-
 
     }
 

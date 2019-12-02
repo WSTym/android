@@ -18,7 +18,7 @@
             android:id="@+id/textNomeExibicao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SagaZ"
+            android:text="@string/app_name"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
             android:id="@+id/textMensagemTexto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Olá tudo bem?"
+            android:text="@string/saudacao"
             android:textSize="18sp" />
     </LinearLayout>
 

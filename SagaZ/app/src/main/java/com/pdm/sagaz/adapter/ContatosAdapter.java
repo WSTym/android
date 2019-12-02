@@ -17,10 +17,6 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by jamiltondamasceno
- */
-
 public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyViewHolder> {
 
     private List<Usuario> contatos;

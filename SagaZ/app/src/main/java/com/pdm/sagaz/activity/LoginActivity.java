@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         campoEmail = findViewById(R.id.editLoginEmail);
         campoSenha = findViewById(R.id.editLoginSenha);
 
-
     }
 
     public void logarUsuario(Usuario usuario){
@@ -97,7 +96,6 @@ public class LoginActivity extends AppCompatActivity {
                     "Preencha o email!",
                     Toast.LENGTH_SHORT).show();
         }
-
 
     }
 

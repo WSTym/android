@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -19,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="@string/app_name" />
 
         <ImageView
             android:id="@+id/imageMensagemFoto"
@@ -31,6 +33,7 @@
             android:id="@+id/textMensagemTexto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/saudacao"
             android:textSize="18sp" />
     </LinearLayout>
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.whatsapp.cursoandroid.jamiltondamasceno.whatsapp.activity.CadastroGrupoActivity"
+    tools:context=".activity.CadastroGrupoActivity"
     tools:showIn="@layout/activity_cadastro_grupo">
 
     <LinearLayout
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Nome do grupo"
+                android:hint="@string/nome_grupo"
                 android:inputType="textPersonName" />
 
         </LinearLayout>
@@ -43,9 +43,9 @@
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Defina um nome e uma imagem opcional" />
+            android:text="@string/info" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,11 +58,11 @@
             android:id="@+id/textTotalParticipantes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Participantes: 0"
+            android:text="@string/participantes"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerMembrosGrupo"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

@@ -54,7 +54,6 @@ public class UsuarioFirebase {
             return false;
         }
 
-
     }
 
     public static boolean atualizarFotoUsuario(Uri url){
@@ -79,7 +78,6 @@ public class UsuarioFirebase {
             e.printStackTrace();
             return false;
         }
-
 
     }
 
