@@ -188,7 +188,6 @@ public class GrupoActivity extends AppCompatActivity {
                         listaMembros.add( usuario );
                     }
 
-
                 }
 
                 contatosAdapter.notifyDataSetChanged();
