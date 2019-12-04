@@ -1,8 +1,7 @@
 package com.pdm.sagaz.activity;
 
 import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.Intent;;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,8 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +33,7 @@ import com.pdm.sagaz.R;
 import com.pdm.sagaz.adapter.MensagensAdapter;
 import com.pdm.sagaz.config.ConfiguracaoFirebase;
 import com.pdm.sagaz.helper.Base64Custom;
+import com.pdm.sagaz.helper.Permissao;
 import com.pdm.sagaz.helper.UsuarioFirebase;
 import com.pdm.sagaz.model.Conversa;
 import com.pdm.sagaz.model.Grupo;
@@ -43,7 +41,6 @@ import com.pdm.sagaz.model.Mensagem;
 import com.pdm.sagaz.model.Usuario;
 
 import java.io.ByteArrayOutputStream;
-import java.security.Permission;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -52,10 +49,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatActivity extends AppCompatActivity {
 
+    private String[] permissoesNecessarias = new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
     private TextView textViewNome;
     private CircleImageView circleImageViewFoto;
     private EditText editMensagem;
-    private ImageView imageCamera;
+    private ImageView imageCamera, imageGaleria;
     private Usuario usuarioDestinatario;
     private Usuario usuarioRemetente;
     private DatabaseReference database;
@@ -73,6 +74,7 @@ public class ChatActivity extends AppCompatActivity {
     private List<Mensagem> mensagens = new ArrayList<>();
 
     private static final int SELECAO_CAMERA  = 100;
+    private static final int SELECAO_GALERIA = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +93,11 @@ public class ChatActivity extends AppCompatActivity {
         circleImageViewFoto = findViewById(R.id.circleImageFotoChat);
         editMensagem = findViewById(R.id.editMensagem);
         recyclerMensagens = findViewById(R.id.recyclerMensagens);
-        imageCamera       = findViewById(R.id.imageCamera);
+        imageCamera = findViewById(R.id.imageCamera);
+        imageGaleria =findViewById(R.id.imageGaleria);
+
+        //Validar permissões
+        Permissao.validarPermissoes(permissoesNecessarias, this, 1);
 
         //recupera dados do usuario remetente
         idUsuarioRemetente = UsuarioFirebase.getIdentificadorUsuario();
@@ -164,21 +170,20 @@ public class ChatActivity extends AppCompatActivity {
 
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if ( i.resolveActivity(getPackageManager()) != null ){
-
-                    if (ContextCompat.checkSelfPermission(ChatActivity.this,
-                            Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-
-                        ActivityCompat.requestPermissions(ChatActivity.this,
-                                new String[]{Manifest.permission.CAMERA},
-                                SELECAO_CAMERA);
-
-                    }else {
-                        startActivityForResult(i, SELECAO_CAMERA );
-                    }
-
+                    startActivityForResult(i, SELECAO_CAMERA );
                 }
 
+            }
+        });
+
+        imageGaleria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
+                if ( i.resolveActivity(getPackageManager()) != null ){
+                    startActivityForResult(i, SELECAO_GALERIA );
+                }
             }
         });
 
@@ -197,6 +202,10 @@ public class ChatActivity extends AppCompatActivity {
                 switch ( requestCode ){
                     case SELECAO_CAMERA:
                         imagem = (Bitmap) data.getExtras().get("data");
+                        break;
+                    case SELECAO_GALERIA:
+                        Uri localImagemSelecionada = data.getData();
+                        imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), localImagemSelecionada );
                         break;
                 }
 

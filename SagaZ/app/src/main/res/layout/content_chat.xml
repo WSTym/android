@@ -54,6 +54,13 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 app:srcCompat="@drawable/ic_camera_cinza_24dp" />
+
+            <ImageView
+                android:id="@+id/imageGaleria"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_foto_cinza_24dp" />
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
