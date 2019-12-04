@@ -125,9 +125,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                     usuarioLogado.setNome( nome );
                     usuarioLogado.atualizar();
 
-                    Toast.makeText(ConfiguracoesActivity.this,
-                            "Nome alterado com sucesso!",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfiguracoesActivity.this,"Nome alterado com sucesso!", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -167,16 +165,15 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                     final StorageReference imagemRef = storageReference
                             .child("imagens")
                             .child("perfil")
-                            //.child( identificadorUsuario )
                             .child(identificadorUsuario + ".jpeg");
 
                     UploadTask uploadTask = imagemRef.putBytes( dadosImagem );
                     uploadTask.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ConfiguracoesActivity.this,
-                                    "Erro ao fazer upload da imagem",
-                                    Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(ConfiguracoesActivity.this,"Erro ao fazer upload da imagem",Toast.LENGTH_SHORT).show();
+
                         }
                     }).addOnSuccessListener(ConfiguracoesActivity.this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -184,8 +181,10 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                             Task<Uri> url = imagemRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
+
                                     Toast.makeText(ConfiguracoesActivity.this, "Sucesso ao fazer upload da imagem", Toast.LENGTH_SHORT).show();
                                     atualizaFotoUsuario(uri);
+
                                 }
                             });
                         }
@@ -207,9 +206,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             usuarioLogado.setFoto( url.toString() );
             usuarioLogado.atualizar();
 
-            Toast.makeText(ConfiguracoesActivity.this,
-                    "Sua foto foi alterada!",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfiguracoesActivity.this,"Sua foto foi alterada!", Toast.LENGTH_SHORT).show();
 
         }
 

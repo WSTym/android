@@ -1,6 +1,8 @@
 package com.pdm.sagaz.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,12 +17,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +43,7 @@ import com.pdm.sagaz.model.Mensagem;
 import com.pdm.sagaz.model.Usuario;
 
 import java.io.ByteArrayOutputStream;
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -158,7 +164,19 @@ public class ChatActivity extends AppCompatActivity {
 
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if ( i.resolveActivity(getPackageManager()) != null ){
-                    startActivityForResult(i, SELECAO_CAMERA );
+
+                    if (ContextCompat.checkSelfPermission(ChatActivity.this,
+                            Manifest.permission.CAMERA)
+                            != PackageManager.PERMISSION_GRANTED) {
+
+                        ActivityCompat.requestPermissions(ChatActivity.this,
+                                new String[]{Manifest.permission.CAMERA},
+                                SELECAO_CAMERA);
+
+                    }else {
+                        startActivityForResult(i, SELECAO_CAMERA );
+                    }
+
                 }
 
             }
@@ -193,7 +211,7 @@ public class ChatActivity extends AppCompatActivity {
                     String nomeImagem = UUID.randomUUID().toString();
 
                     //Configurar referencia do firebase
-                    StorageReference imagemRef = storage.child("imagens")
+                    final StorageReference imagemRef = storage.child("imagens")
                             .child("fotos")
                             .child( idUsuarioRemetente )
                             .child( nomeImagem );
@@ -202,31 +220,34 @@ public class ChatActivity extends AppCompatActivity {
                     uploadTask.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+
                             Log.d("Erro", "Erro ao fazer upload");
-                            Toast.makeText(ChatActivity.this,
-                                    "Erro ao fazer upload da imagem",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChatActivity.this,"Erro ao fazer upload da imagem", Toast.LENGTH_SHORT).show();
+
                         }
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            String dowloadUrl = taskSnapshot.getStorage().getDownloadUrl().toString();
+                            Task<Uri> dowloadUrl = imagemRef.getDownloadUrl().addOnSuccessListener(ChatActivity.this, new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
 
-                            Mensagem mensagem = new Mensagem();
-                            mensagem.setIdUsuario( idUsuarioRemetente );
-                            mensagem.setMensagem("imagem.jpeg");
-                            mensagem.setImagem( dowloadUrl );
+                                    Mensagem mensagem = new Mensagem();
+                                    mensagem.setIdUsuario(idUsuarioRemetente);
+                                    mensagem.setMensagem("imagem.jpeg");
+                                    mensagem.setImagem(uri.toString());
 
-                            //Salvar mensagem remetente
-                            salvarMensagem(idUsuarioRemetente, idUsuarioDestinatario, mensagem);
+                                    //Salvar mensagem remetente
+                                    salvarMensagem(idUsuarioRemetente, idUsuarioDestinatario, mensagem);
 
-                            //Salvar mensagem para o destinatario
-                            salvarMensagem(idUsuarioDestinatario, idUsuarioRemetente, mensagem);
+                                    //Salvar mensagem para o destinatario
+                                    salvarMensagem(idUsuarioDestinatario, idUsuarioRemetente, mensagem);
 
-                            Toast.makeText(ChatActivity.this,
-                                    "Sucesso ao enviar imagem",
-                                    Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ChatActivity.this, "Sucesso ao enviar imagem", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
 
                         }
                     });
@@ -289,9 +310,7 @@ public class ChatActivity extends AppCompatActivity {
             }
 
         }else {
-            Toast.makeText(ChatActivity.this,
-                    "Digite uma mensagem para enviar!",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(ChatActivity.this,"Digite uma mensagem para enviar!", Toast.LENGTH_LONG).show();
         }
 
     }
